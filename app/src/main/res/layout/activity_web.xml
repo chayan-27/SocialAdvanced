@@ -18,6 +18,7 @@
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             app:title="@string/app_name"
+            app:titleMargin="4dp"
 
             app:titleTextColor="@android:color/white"
             app:menu="@menu/close"
@@ -40,6 +41,7 @@
         android:id="@+id/webview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+
 
 
 
