@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
         }
         GridLayoutManager gridLayoutManager=new GridLayoutManager(this,2);
         recyclerView.setLayoutManager(gridLayoutManager);
-        List<Integer> list=new ArrayList<>();
+       /* List<Integer> list=new ArrayList<>();
         list.add(R.drawable.ic_google_icon);
         list.add(R.drawable.ic_instagram);
         list.add(R.drawable.ic_facebook);
@@ -40,12 +40,12 @@ public class MainActivity extends AppCompatActivity {
         list.add(R.drawable.ic_twitter);
         list.add(R.drawable.ic_linkedin);
         list.add(R.drawable.ic_youtube);
-        list.add(R.drawable.ic_medium);
+        list.add(R.drawable.ic_quora);
         list.add(R.drawable.ic_amazon_logo);
         list.add(R.drawable.ic_flipkart);
         list.add(R.drawable.ic_amazon_prime);
         list.add(R.drawable.ic_netflix_1);
-
+*/
 
         List<String> list1=new ArrayList<>();
         list1.add("Google");
@@ -55,11 +55,25 @@ public class MainActivity extends AppCompatActivity {
         list1.add("Twitter");
         list1.add("LinkedIn");
         list1.add("Youtube");
-        list1.add("Medium");
+        list1.add("Quora");
         list1.add("Amazon");
         list1.add("Flipkart");
         list1.add("Prime");
         list1.add("Netflix");
+
+        List<String> list2=new ArrayList<>();
+        list2.add("https://www.google.com/images/branding/product_ios/3x/gsa_ios_60dp.png");
+        list2.add("https://www.instagram.com/static/images/ico/favicon-192.png/68d99ba29cc8.png");
+        list2.add("https://static.xx.fbcdn.net/rsrc.php/v3/ye/r/a36n03MSzp1.png");
+        list2.add("https://web.telegram.org/img/iphone_home120.png");
+        list2.add("https://abs.twimg.com/responsive-web/client-web-legacy/icon-ios.8ea219d5.png");
+        list2.add("https://static-exp1.licdn.com/scds/common/u/images/logos/favicons/v1/favicon.ico");
+        list2.add("https://s.ytimg.com/yts/mobile/img/apple-touch-icon-144x144-precomposed-vflopw1IA.png");
+        list2.add("https://nl.quora.com/apple-touch-icon-precomposed.png");
+        list2.add("https://www.amazon.com/favicon.ico");
+        list2.add("https://img1a.flixcart.com/www/linchpin/batman-returns/images/logo_lite-cbb3574d.png");
+        list2.add("https://m.media-amazon.com/images/G/01/digital/video/DVUI/favicons/apple-touch-icon-152x152._CB527404565_.png");
+        list2.add("https://assets.nflxext.com/us/ffe/siteui/common/icons/nficon2016.png");
 
 
         List<String> urls=new ArrayList<>();
@@ -71,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
         urls.add("https://twitter.com/?lang=en");
         urls.add("https://in.linkedin.com/");
         urls.add("https://www.youtube.com/");
-        urls.add("https://medium.com/");
+        urls.add("https://www.quora.com/");
         urls.add("https://www.amazon.in/ref=nav_logo");
         urls.add("https://www.flipkart.com/");
         urls.add("https://www.primevideo.com/");
@@ -79,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        recyclerView.setAdapter(new RecycleAdap(list,list1,urls,this));
+        recyclerView.setAdapter(new RecycleAdap(list2,list1,urls,this));
 
     }
 

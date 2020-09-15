@@ -2,6 +2,7 @@ package com.chayan_27.webadv;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 
 import android.annotation.SuppressLint;
@@ -10,6 +11,7 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -25,7 +27,8 @@ import android.webkit.URLUtil;
 import android.webkit.WebChromeClient;
 import android.widget.FrameLayout;
 import android.widget.Toast;
-import android.widget.Toolbar;
+
+import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
 
@@ -34,6 +37,7 @@ import im.delight.android.webview.AdvancedWebView;
 public class WebAct extends AppCompatActivity implements AdvancedWebView.Listener {
 
     private AdvancedWebView mWebView;
+    public static Drawable drawable;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,8 +45,9 @@ public class WebAct extends AppCompatActivity implements AdvancedWebView.Listene
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_web);
+        Intent intent=getIntent();
 
-        Toolbar toolbar=(Toolbar)findViewById(R.id.toolbar);
+        androidx.appcompat.widget.Toolbar toolbar=findViewById(R.id.toolbar);
         toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
@@ -54,8 +59,10 @@ public class WebAct extends AppCompatActivity implements AdvancedWebView.Listene
             }
         });
 
-        Intent intent=getIntent();
 
+
+        toolbar.setLogo(drawable);
+        toolbar.setTitle(intent.getStringExtra("title"));
 
 
         mWebView = (AdvancedWebView) findViewById(R.id.webview);

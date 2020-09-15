@@ -2,6 +2,7 @@ package com.chayan_27.webadv;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,15 +15,17 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.List;
 
 public class RecycleAdap extends RecyclerView.Adapter<RecycleAdap.ContentHolder> {
-    List<Integer> list;
+    List<String> list;
     List<String> list1;
     List<String> urls;
     Context context;
 
-    public RecycleAdap(List<Integer> list, List<String> list1, List<String> urls, Context context) {
+    public RecycleAdap(List<String> list, List<String> list1, List<String> urls, Context context) {
         this.list = list;
         this.list1 = list1;
         this.urls = urls;
@@ -39,26 +42,28 @@ public class RecycleAdap extends RecyclerView.Adapter<RecycleAdap.ContentHolder>
 
 
     @Override
-    public void onBindViewHolder(@NonNull ContentHolder holder, final int position) {
-        holder.imageView.setImageResource(list.get(position));
+    public void onBindViewHolder(@NonNull final ContentHolder holder, final int position) {
+        //holder.imageView.setImageResource(list.get(position));
+        Picasso.get().load(list.get(position)).into(holder.imageView);
         holder.textView.setText(list1.get(position));
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(list1.get(position).equalsIgnoreCase("Telegrham")){
-                    Intent i = new Intent(Intent.ACTION_VIEW);
-                    i.setData(Uri.parse(urls.get(position)));
-                    context.startActivity(i);
-                }else{
+
+                    Drawable res=holder.imageView.getDrawable();
+                    WebAct.drawable=res;
                     Intent intent=new Intent(context,WebAct.class);
                     intent.putExtra("url",urls.get(position));
+                    intent.putExtra("title",list1.get(position));
+
                     context.startActivity(intent);
-                }
+
 
 
 
             }
         });
+
 
     }
 
