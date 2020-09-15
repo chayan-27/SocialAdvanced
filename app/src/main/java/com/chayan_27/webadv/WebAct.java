@@ -3,6 +3,7 @@ package com.chayan_27.webadv;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+
 import android.annotation.SuppressLint;
 import android.app.DownloadManager;
 import android.content.Intent;
@@ -16,12 +17,17 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.webkit.CookieManager;
 import android.webkit.DownloadListener;
+import android.webkit.JavascriptInterface;
 import android.webkit.URLUtil;
 import android.webkit.WebChromeClient;
 import android.widget.FrameLayout;
 import android.widget.Toast;
+import android.widget.Toolbar;
+
+import java.io.IOException;
 
 import im.delight.android.webview.AdvancedWebView;
 
@@ -31,14 +37,31 @@ public class WebAct extends AppCompatActivity implements AdvancedWebView.Listene
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_web);
+
+        Toolbar toolbar=(Toolbar)findViewById(R.id.toolbar);
+        toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                if(item.getItemId()==R.id.close){
+                    finish();
+                    return true;
+                }
+                return false;
+            }
+        });
+
         Intent intent=getIntent();
+
+
 
         mWebView = (AdvancedWebView) findViewById(R.id.webview);
         mWebView.setListener(this, this);
         mWebView.setMixedContentAllowed(true);
-        mWebView.setDownloadListener(new DownloadListener() {
+       /* mWebView.setDownloadListener(new DownloadListener() {
             @Override
             public void onDownloadStart(String url, String userAgent, String contentDisposition, String mimetype, long contentLength) {
                 String s2=url.substring(url.indexOf(":")+1);
@@ -78,7 +101,7 @@ public class WebAct extends AppCompatActivity implements AdvancedWebView.Listene
                 Toast.makeText(getApplicationContext(), "Downloading File",
                         Toast.LENGTH_LONG).show();
             }
-        });
+        });*/
 
 
 
@@ -86,6 +109,7 @@ public class WebAct extends AppCompatActivity implements AdvancedWebView.Listene
 
         mWebView.setWebChromeClient(new ChromeClient());
         mWebView.loadUrl(intent.getStringExtra("url"));
+        mWebView.setLongClickable(true);
     }
 
 
@@ -137,6 +161,29 @@ public class WebAct extends AppCompatActivity implements AdvancedWebView.Listene
 
     @Override
     public void onDownloadRequested(String url, String suggestedFilename, String mimeType, long contentLength, String contentDisposition, String userAgent) {
+        /*try {
+            Intent i = new Intent(Intent.ACTION_VIEW);
+            i.setData(Uri.parse(url));
+            startActivity(i);
+        }catch (Exception e){
+            String s2=url.substring(url.indexOf(":")+1);
+            Intent i = new Intent(Intent.ACTION_VIEW);
+            i.setData(Uri.parse(s2));
+            startActivity(i);
+        }*/
+        try {
+            AdvancedWebView.handleDownload(this, url, suggestedFilename);
+        }catch (Exception e){
+            Intent i = new Intent(Intent.ACTION_VIEW);
+            i.setData(Uri.parse(getIntent().getStringExtra("url")));
+            startActivity(i);
+           // String s2=url.substring(url.indexOf(":")+1);
+            //AdvancedWebView.handleDownload(this,, suggestedFilename);
+           /* CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
+            CustomTabsIntent customTabsIntent = builder.build();
+            customTabsIntent.launchUrl(this, Uri.parse("https://stackoverflow.com"));*/
+
+        }
 
       /*  String s2=url.substring(url.indexOf(":")+1);
        *//* String s1= s2.substring(0,url.indexOf(":")+1);
@@ -215,7 +262,7 @@ public class WebAct extends AppCompatActivity implements AdvancedWebView.Listene
     }
 
 
-    @Override
+    /*@Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.close,menu);
         return true;
@@ -230,5 +277,8 @@ public class WebAct extends AppCompatActivity implements AdvancedWebView.Listene
             return true;
         }
         return super.onOptionsItemSelected(item);
-    }
+    }*/
+
+
+
 }

@@ -2,6 +2,7 @@ package com.chayan_27.webadv;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,10 +45,18 @@ public class RecycleAdap extends RecyclerView.Adapter<RecycleAdap.ContentHolder>
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(list1.get(position).equalsIgnoreCase("Telegrham")){
+                    Intent i = new Intent(Intent.ACTION_VIEW);
+                    i.setData(Uri.parse(urls.get(position)));
+                    context.startActivity(i);
+                }else{
+                    Intent intent=new Intent(context,WebAct.class);
+                    intent.putExtra("url",urls.get(position));
+                    context.startActivity(intent);
+                }
 
-                Intent intent=new Intent(context,WebAct.class);
-                intent.putExtra("url",urls.get(position));
-                context.startActivity(intent);
+
+
             }
         });
 
