@@ -1,15 +1,19 @@
 package com.chayan_27.webadv;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.Manifest;
+import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.view.MenuItem;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -23,6 +27,31 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         recyclerView=(RecyclerView)findViewById(R.id.contents);
+        final androidx.appcompat.widget.Toolbar toolbar=findViewById(R.id.toolbar);
+        toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                if(item.getItemId()==R.id.about){
+                    final AlertDialog.Builder alert=new AlertDialog.Builder(MainActivity.this);
+                    alert.setCancelable(true)
+                            .setNegativeButton("Close", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.cancel();
+
+                                }
+                            }).setMessage("An all in one social media app which supports over 12 original android apps and hence relieves the user from downloading each application separately thereby saving memory space and preventing distractions due to annoying notifications from them\n\nCreated By : Chayan Sharma");
+                    AlertDialog alertDialog = alert.create();
+                    alertDialog.setTitle("About The App");
+                    alertDialog.show();
+
+
+
+                    return true;
+                }
+                return false;
+            }
+        });
 
         int check= ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE);
         int check2=ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE);

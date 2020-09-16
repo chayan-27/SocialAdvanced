@@ -28,6 +28,7 @@
             android:id="@+id/toolbar"
             app:title="@string/app_name"
             app:titleTextColor="@android:color/white"
+            app:menu="@menu/abt"
 
 
             android:layout_width="match_parent"
